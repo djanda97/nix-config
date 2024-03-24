@@ -28,7 +28,12 @@
       nixosConfigurations = {
         framework = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./nixos/configuration.nix hardware.nixosModules.framework-13-7040-amd ];
+          modules = [ ./nixos/machines/framework/configuration.nix hardware.nixosModules.framework-13-7040-amd ];
+        };
+
+        fractal = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ ./nixos/machines/fractal/configuration.nix ];
         };
       };
 

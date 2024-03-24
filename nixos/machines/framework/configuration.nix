@@ -4,6 +4,8 @@
 }: {
   imports = [ ./hardware-configuration.nix ];
 
+  system.stateVersion = "23.11";
+
   boot = {
     loader = {
       systemd-boot.enable = true;
@@ -68,13 +70,12 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    vim
     wget
     curl
     nnn
     helix
     kitty
-    tailscale
+    # tailscale
     ripgrep
     fzf
     bat
@@ -86,16 +87,28 @@
     home-manager
     sysz
     manix
-    nixfmt
-    alejandra
     nixpkgs-fmt
   ];
 
-  programs = { nix-ld = { enable = true; }; };
+  programs = {
+    nix-ld = {
+      enable = true;
+    };
 
-  services = { jellyfin = { enable = true; }; };
+    steam = {
+      enable = true;
+    };
+  };
 
-  system.stateVersion = "23.11";
+  services = {
+    jellyfin = {
+      enable = true;
+    };
+
+    tailscale = {
+      enable = true;
+    };
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
