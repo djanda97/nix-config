@@ -75,7 +75,6 @@
     nnn
     helix
     kitty
-    # tailscale
     ripgrep
     fzf
     bat
@@ -88,6 +87,7 @@
     sysz
     manix
     nixpkgs-fmt
+    cloc
   ];
 
   programs = {
