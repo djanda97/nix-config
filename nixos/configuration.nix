@@ -1,15 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
-{
-  imports =
-    [ # Include the results of the hardware scan.
-      # <nixos-hardware/framework/13-inch/7040-amd>
-      ./hardware-configuration.nix
-    ];
+{ config
+, pkgs
+, ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    # <nixos-hardware/framework/13-inch/7040-amd>
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -84,10 +84,7 @@
     isNormalUser = true;
     description = "David";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      thunderbird
-    ];
+    packages = with pkgs; [ firefox thunderbird ];
   };
 
   # Allow unfree packages
@@ -102,22 +99,26 @@
     nnn
     helix
     kitty
-    jellyfin
     tailscale
     ripgrep
     fzf
     bat
-    haskellPackages.hakyll
     gnome.gnome-tweaks
     iosevka
     makemkv
     handbrake
     htop
-    # git
-    # vscodium
     home-manager
-    # haskellPackages.ghcup
+    sysz
+    manix
+    nixfmt
+    alejandra
+    nixpkgs-fmt
   ];
+
+  programs = { nix-ld = { enable = true; }; };
+
+  services = { jellyfin = { enable = true; }; };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
