@@ -10,8 +10,6 @@
     };
 
     hardware.url = "github:nixos/nixos-hardware";
-
-    # nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs =
@@ -23,6 +21,7 @@
     } @ inputs:
     let
       inherit (self) outputs;
+      system = "x86_64-linux";
     in
     {
       # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -36,7 +35,7 @@
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
         "david@framework" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = nixpkgs.legacyPackages.${system};
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ ./home-manager/home.nix ];
         };
