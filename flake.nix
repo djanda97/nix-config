@@ -25,29 +25,19 @@
       inherit (self) outputs;
     in
     {
-      # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#your-hostname'
       nixosConfigurations = {
-        # FIXME replace with your hostname
         framework = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          # > Our main nixos configuration file <
-          modules = [
-            ./nixos/configuration.nix
-            hardware.nixosModules.framework-13-7040-amd
-          ];
+          modules = [ ./nixos/configuration.nix hardware.nixosModules.framework-13-7040-amd ];
         };
       };
 
-      # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        # FIXME replace with your username@hostname
         "david@framework" = home-manager.lib.homeManagerConfiguration {
-          pkgs =
-            nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs outputs; };
-          # > Our main home-manager configuration file <
           modules = [ ./home-manager/home.nix ];
         };
       };
