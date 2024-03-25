@@ -67,7 +67,11 @@
     packages = with pkgs; [ firefox thunderbird ];
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     wget
@@ -88,6 +92,8 @@
     manix
     nixpkgs-fmt
     cloc
+    eza
+    zenith
   ];
 
   programs = {
@@ -110,5 +116,9 @@
     };
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    substituters = [ "https://devenv.cachix.org" ];
+    trusted-public-keys = [ "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=" ];
+  };
 }

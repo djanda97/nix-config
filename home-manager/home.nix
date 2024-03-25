@@ -18,7 +18,7 @@
     stateVersion = "23.11";
     username = "david";
     homeDirectory = "/home/david";
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
   programs = {
